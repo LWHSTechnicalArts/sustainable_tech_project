@@ -26,66 +26,11 @@
 #define EPD_SPI &SPI // primary SPI
 #endif
 
-// 1.54" Monochrome displays with 200x200 pixels and SSD1681 chipset
-// ThinkInk_154_Mono_D67 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 1.54" Monochrome displays with 200x200 pixels and SSD1608 chipset
-// ThinkInk_154_Mono_D27 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 1.54" Monochrome displays with 152x152 pixels and UC8151D chipset
-// ThinkInk_154_Mono_M10 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 2.13" Monochrome displays with 250x122 pixels and SSD1675 chipset
-//ThinkInk_213_Mono_B72 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 2.13" Monochrome displays with 250x122 pixels and SSD1675B chipset
-// ThinkInk_213_Mono_B73 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 2.13" Monochrome displays with 250x122 pixels and SSD1680 chipset
-// ThinkInk_213_Mono_BN display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-// ThinkInk_213_Mono_B74 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
 // The GDEY0213B74 is like the B74 above but is not 'shifted down' by 8 pixels
 ThinkInk_213_Mono_GDEY0213B74 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
 
-// 2.13" Monochrome displays with 212x104 pixels and UC8151D chipset
-// ThinkInk_213_Mono_M21 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 2.66" Monochrome display with 296x152 pixels and SSD1680 chipset
-// ThinkInk_266_Grayscale4_MFGN display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY,
-//                                      EPD_SPI);
-
-// 2.9" 4-level Grayscale (use mono) displays with 296x128 pixels and SSD1680 chip
-// ThinkInk_290_Grayscale4_EAAMFGN display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 2.9" 4-level Grayscale (use mono) displays with 296x128 pixels and IL0373 chipset
-// ThinkInk_290_Grayscale4_T5 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS,
-// EPD_BUSY, EPD_SPI);
-
-// 2.9" Monochrome displays with 296x128 pixels and UC8151D chipset
-// ThinkInk_290_Mono_M06 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 3.7" Monochrome Display with 420x240 pixels and UC8253 chipset
-// ThinkInk_370_Mono_BAAMFGN display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS,
-// EPD_BUSY, EPD_SPI);
-
-// 4.2" Monochrome displays with 400x300 pixels and SSD1619 chipset
-// ThinkInk_420_Mono_BN display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 4.2" Monochrome displays with 400x300 pixels and UC8276 chipset
-// ThinkInk_420_Mono_M06 display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 4.2 Grayscale/Monochrome displays with 400x300 pixels and SSD1683 chipset
-// ThinkInk_420_Grayscale4_MFGN display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
-// 5.83 Monochrome displays with 648 x 480 pixels and UC8179 chipset
-// ThinkInk_583_Mono_AAAMFGN display(EPD_DC, EPD_RESET, EPD_CS, SRAM_CS, EPD_BUSY, EPD_SPI);
-
 void setup() {
   Serial.begin(115200);
-  while (!Serial) {
-    delay(10);
-  }
   Serial.println("Adafruit EPD full update test in mono");
   display.begin(THINKINK_MONO);
 }
@@ -93,10 +38,10 @@ void setup() {
 void loop() {
   Serial.println("Banner demo");
   display.clearBuffer();
-  display.setTextSize(3);
+  display.setTextSize(4);
   display.setCursor((display.width() - 180) / 2, (display.height() - 24) / 2);
   display.setTextColor(EPD_BLACK);
-  display.print("Monochrome");
+  display.print("Hello!");
   display.display();
 
   delay(2000);
@@ -112,27 +57,41 @@ void loop() {
   Serial.println("Text demo");
   // large block of text
   display.clearBuffer();
-  display.setTextSize(1);
+  display.setTextSize(2);
   testdrawtext(
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur "
-      "adipiscing ante sed nibh tincidunt feugiat. Maecenas enim massa, "
-      "fringilla sed malesuada et, malesuada sit amet turpis. Sed porttitor "
-      "neque ut ante pretium vitae malesuada nunc bibendum. Nullam aliquet "
-      "ultrices massa eu hendrerit. Ut sed nisi lorem. In vestibulum purus a "
-      "tortor imperdiet posuere. ",
+      "Lick-Wilmerding is \n"
+      "full of many \n"
+      "wild teens \n"
+      "living like \n"
+      "there's no tomorrow! \n",
       EPD_BLACK);
   display.display();
 
   delay(2000);
 
   display.clearBuffer();
-  for (int16_t i = 0; i < display.width(); i += 4) {
-    display.drawLine(0, 0, i, display.height() - 1, EPD_BLACK);
+  
+  // Draw a simple face
+  int centerX = display.width() / 2;
+  int centerY = display.height() / 2;
+  int faceRadius = 40;
+  
+  // Face outline (circle)
+  display.drawCircle(centerX, centerY, faceRadius, EPD_BLACK);
+  
+  // Eyes
+  display.fillCircle(centerX - 15, centerY - 10, 8, EPD_BLACK);
+  display.fillCircle(centerX + 15, centerY - 10, 8, EPD_BLACK);
+  
+  // Nose (small line)
+  display.drawLine(centerX, centerY - 2, centerX, centerY + 5, EPD_BLACK);
+  
+  // Mouth (smile)
+  for (int i = -15; i <= 15; i++) {
+    int y = centerY + 15 + (i * i) / 25; // parabolic curve for smile
+    display.drawPixel(centerX + i, y, EPD_BLACK);
   }
-
-  for (int16_t i = 0; i < display.height(); i += 4) {
-    display.drawLine(display.width() - 1, 0, 0, i, EPD_BLACK);
-  }
+  
   display.display();
 
   delay(2000);
